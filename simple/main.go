@@ -1,19 +1,12 @@
 package main
 
-import (
-	"blockchain/pkg/blockchain"
-	"fmt"
-)
+import "simple/pkg/blockchain"
 
 func main() {
-	blockchain := blockchain.CreateBlockchain(2)
+	chain := blockchain.NewBlockChain()
 
-	blockchain.AddBlock("Alice", "Bob", 5)
-	blockchain.AddBlock("John", "Bob", 2)
+	chain.AddBlock("Send 1 BTC to Mike")
+	chain.AddBlock("Send 2 more BTC to Mike")
 
-	blockchain.Print()
-
-	fmt.Println("-------------------------------------------------------")
-	fmt.Printf("Chain is Valid: %t\n", blockchain.IsValid())
-	fmt.Println("-------------------------------------------------------")
+	chain.Print()
 }
