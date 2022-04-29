@@ -1,6 +1,6 @@
 package main
 
-import "simple/pkg/blockchain"
+import "github.com/mikesupertrampster-corp/blockchain/simple/pkg/blockchain"
 
 func main() {
 	chain := blockchain.NewBlockChain()
