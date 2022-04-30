@@ -5,14 +5,14 @@ import (
 	simple "github.com/mikesupertrampster-corp/blockchain/simple/pkg/blockchain"
 )
 
-const dbFile = "blockchain.db"
+const dbFile = "blockchain.DB"
 const blocksBucket = "blocks"
 
 var lastBlockPointer = []byte("l")
 
 type Blockchain struct {
 	lastBlock []byte
-	db        *bolt.DB
+	DB        *bolt.DB
 }
 
 type Iterator struct {
@@ -20,7 +20,7 @@ type Iterator struct {
 	db          *bolt.DB
 }
 
-func NewBlockChain() (*Blockchain, error) {
+func NewBlockchain() (*Blockchain, error) {
 	var lastBlock []byte
 	db, err := bolt.Open(dbFile, 0600, nil)
 	if err != nil {
@@ -70,7 +70,7 @@ func NewBlockChain() (*Blockchain, error) {
 func (bc *Blockchain) AddBlock(data string) error {
 	var lastHash []byte
 
-	err := bc.db.View(func(tx *bolt.Tx) error {
+	err := bc.DB.View(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(blocksBucket))
 		lastHash = b.Get(lastBlockPointer)
 		return nil
@@ -81,7 +81,7 @@ func (bc *Blockchain) AddBlock(data string) error {
 
 	newBlock := simple.NewBlock(data, lastHash)
 
-	err = bc.db.Update(func(tx *bolt.Tx) error {
+	err = bc.DB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(blocksBucket))
 
 		SerializeBlock, err := Serialize(newBlock)
@@ -112,7 +112,7 @@ func (bc *Blockchain) AddBlock(data string) error {
 func (bc Blockchain) Iterator() *Iterator {
 	bci := &Iterator{
 		currentHash: bc.lastBlock,
-		db:          bc.db,
+		db:          bc.DB,
 	}
 	return bci
 }

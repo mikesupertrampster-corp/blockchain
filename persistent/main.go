@@ -1,16 +1,9 @@
-package main
-
-import (
-	"github.com/mikesupertrampster-corp/blockchain/simple/pkg/blockchain"
-	"time"
-)
+package blockchain
 
 func main() {
-	chain := blockchain.NewBlockChain()
+	bc, _ := persistent.NewBlockchain()
+	defer bc.db.Close()
 
-	chain.AddBlock("Send 1 BTC to Mike")
-	time.Sleep(3 * time.Second)
-	chain.AddBlock("Send 2 more BTC to Mike")
-
-	chain.Print()
+	cli := CLI{bc}
+	cli.Run()
 }

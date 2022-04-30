@@ -9,7 +9,7 @@ import (
 )
 
 type CLI struct {
-	bc *Blockchain
+	Blockchain *Blockchain
 }
 
 func (cli CLI) printUsage() {
@@ -26,12 +26,12 @@ func (cli CLI) validateArgs() {
 }
 
 func (cli CLI) addBlock(data string) {
-	cli.bc.AddBlock(data)
+	cli.Blockchain.AddBlock(data)
 	fmt.Println("Success!")
 }
 
 func (cli CLI) printChain() {
-	bci := cli.bc.Iterator()
+	bci := cli.Blockchain.Iterator()
 
 	for {
 		block, err := bci.Next()
