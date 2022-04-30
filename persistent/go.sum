@@ -1,0 +1,6 @@
+github.com/boltdb/bolt v1.3.1 h1:JQmyP4ZBrce+ZQu0dY660FMfatumYDLun9hBCUVIkF4=
+github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx27Ps=
+github.com/mikesupertrampster-corp/blockchain/simple v0.0.0-20220429133329-9acf385f32e8 h1:ZlzUBssfUmLnRHcWcl/r8zykaRqIpZxmLHC5qwligdw=
+github.com/mikesupertrampster-corp/blockchain/simple v0.0.0-20220429133329-9acf385f32e8/go.mod h1:2GjXr0DQ8kt19M2Mm7/1mZ3CMNSGzFgGrKG5NaK+wtA=
+golang.org/x/sys v0.0.0-20220429121018-84afa8d3f7b3 h1:kBsBifDikLCf5sUMbcD8p73OinDtAQWQp8+n7FiyzlA=
+golang.org/x/sys v0.0.0-20220429121018-84afa8d3f7b3/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
