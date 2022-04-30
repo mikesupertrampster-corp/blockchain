@@ -1,6 +1,7 @@
 package blockchain
 
 import (
+	"flag"
 	"fmt"
 	simple "github.com/mikesupertrampster-corp/blockchain/simple/pkg/blockchain"
 	"log"
@@ -26,7 +27,11 @@ func (cli CLI) validateArgs() {
 }
 
 func (cli CLI) addBlock(data string) {
-	cli.Blockchain.AddBlock(data)
+	err := cli.Blockchain.AddBlock(data)
+	if err != nil {
+		log.Panic(err)
+	}
+
 	fmt.Println("Success!")
 }
 
@@ -39,7 +44,7 @@ func (cli CLI) printChain() {
 			log.Panic(err)
 		}
 
-		fmt.Printf("Prev. hash %x\n", block.PreviousHash)
+		fmt.Printf("Prev. hash: %x\n", block.PreviousHash)
 		fmt.Printf("Data: %s\n", block.Data)
 		fmt.Printf("Hash %x\n", block.Hash)
 		pow := simple.NewProof(block)
@@ -55,4 +60,36 @@ func (cli CLI) printChain() {
 func (cli CLI) Run() {
 	cli.validateArgs()
 
+	addBlockCmd := flag.NewFlagSet("addblock", flag.ExitOnError)
+	printChainCmd := flag.NewFlagSet("printchain", flag.ExitOnError)
+
+	addBlockData := addBlockCmd.String("data", "", "Block data")
+
+	switch os.Args[1] {
+	case "addblock":
+		err := addBlockCmd.Parse(os.Args[2:])
+		if err != nil {
+			log.Panic(err)
+		}
+	case "printchain":
+		err := printChainCmd.Parse(os.Args[2:])
+		if err != nil {
+			log.Panic(err)
+		}
+	default:
+		cli.printUsage()
+		os.Exit(1)
+	}
+
+	if addBlockCmd.Parsed() {
+		if *addBlockData == "" {
+			addBlockCmd.Usage()
+			os.Exit(1)
+		}
+		cli.addBlock(*addBlockData)
+	}
+
+	if printChainCmd.Parsed() {
+		cli.printChain()
+	}
 }

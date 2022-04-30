@@ -1,6 +1,7 @@
 package blockchain
 
 import (
+	"fmt"
 	"github.com/boltdb/bolt"
 	simple "github.com/mikesupertrampster-corp/blockchain/simple/pkg/blockchain"
 )
@@ -31,18 +32,20 @@ func NewBlockchain() (*Blockchain, error) {
 		b := tx.Bucket([]byte(blocksBucket))
 
 		if b == nil {
+			fmt.Println("No existing blockchain found. Creating a new one...")
 			genesis := simple.NewGeneisBlock()
+
 			b, err := tx.CreateBucket([]byte(blocksBucket))
 			if err != nil {
 				return err
 			}
 
-			SerializeBlock, err := Serialize(genesis)
+			serializedBlock, err := Serialize(genesis)
 			if err != nil {
 				return err
 			}
 
-			err = b.Put(genesis.Hash, SerializeBlock)
+			err = b.Put(genesis.Hash, serializedBlock)
 			if err != nil {
 				return err
 			}
@@ -51,7 +54,6 @@ func NewBlockchain() (*Blockchain, error) {
 			if err != nil {
 				return err
 			}
-
 			lastBlock = genesis.Hash
 		} else {
 			lastBlock = b.Get(lastBlockPointer)
@@ -84,12 +86,12 @@ func (bc *Blockchain) AddBlock(data string) error {
 	err = bc.DB.Update(func(tx *bolt.Tx) error {
 		b := tx.Bucket([]byte(blocksBucket))
 
-		SerializeBlock, err := Serialize(newBlock)
+		serializedBlock, err := Serialize(newBlock)
 		if err != nil {
 			return err
 		}
 
-		err = b.Put(newBlock.Hash, SerializeBlock)
+		err = b.Put(newBlock.Hash, serializedBlock)
 		if err != nil {
 			return err
 		}
@@ -117,7 +119,7 @@ func (bc Blockchain) Iterator() *Iterator {
 	return bci
 }
 
-func (bci Iterator) Next() (*simple.Block, error) {
+func (bci *Iterator) Next() (*simple.Block, error) {
 	var block *simple.Block
 
 	err := bci.db.View(func(tx *bolt.Tx) error {
