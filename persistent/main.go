@@ -1,9 +1,18 @@
-package blockchain
+package main
+
+import (
+	persistent "github.com/mikesupertrampster-corp/blockchain/persistent/pkg/blockchain"
+	"log"
+)
 
 func main() {
-	bc, _ := persistent.NewBlockchain()
-	defer bc.db.Close()
+	bc, err := persistent.NewBlockchain()
+	if err != nil {
+		log.Panic(err)
+	}
 
-	cli := CLI{bc}
+	defer bc.DB.Close()
+
+	cli := persistent.CLI{Blockchain: bc}
 	cli.Run()
 }

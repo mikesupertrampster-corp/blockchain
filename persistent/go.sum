@@ -1,6 +1,6 @@
 github.com/boltdb/bolt v1.3.1 h1:JQmyP4ZBrce+ZQu0dY660FMfatumYDLun9hBCUVIkF4=
 github.com/boltdb/bolt v1.3.1/go.mod h1:clJnj/oiGkjum5o1McbSZDSLxVThjynRyGBgiAx27Ps=
-github.com/mikesupertrampster-corp/blockchain/simple v0.0.0-20220429133329-9acf385f32e8 h1:ZlzUBssfUmLnRHcWcl/r8zykaRqIpZxmLHC5qwligdw=
-github.com/mikesupertrampster-corp/blockchain/simple v0.0.0-20220429133329-9acf385f32e8/go.mod h1:2GjXr0DQ8kt19M2Mm7/1mZ3CMNSGzFgGrKG5NaK+wtA=
+github.com/mikesupertrampster-corp/blockchain/simple v0.0.0-20220430045400-916ad617ca43 h1:RzUHFvHZsNn1ZwpFtn+n4x4nCTT0Q4N2fsbz6qTIrNk=
+github.com/mikesupertrampster-corp/blockchain/simple v0.0.0-20220430045400-916ad617ca43/go.mod h1:2GjXr0DQ8kt19M2Mm7/1mZ3CMNSGzFgGrKG5NaK+wtA=
 golang.org/x/sys v0.0.0-20220429233432-b5fbb4746d32 h1:Js08h5hqB5xyWR789+QqueR6sDE8mk+YvpETZ+F6X9Y=
 golang.org/x/sys v0.0.0-20220429233432-b5fbb4746d32/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
