@@ -20,7 +20,7 @@ type Iterator struct {
 	db          *bolt.DB
 }
 
-func NewBlockChain(dbFile string) (*Blockchain, error) {
+func NewBlockChain() (*Blockchain, error) {
 	var lastBlock []byte
 	db, err := bolt.Open(dbFile, 0600, nil)
 	if err != nil {
